@@ -1,0 +1,61 @@
+"assets" folder: This folder would contain any images or other assets needed for the game, such as the photos that are displayed.
+
+-
+
+In the "assets" folder, you would likely include the following types of files:
+
+Images: The photos that are displayed in the game. These could be in a variety of file formats, such as JPEG or PNG.
+Audio files: If the game include audio as part of it.
+
+-
+
+There are several Content Delivery Networks (CDNs) that you can use to serve images and other assets on your website:
+
+Cloudflare: Cloudflare is a popular CDN that also provides additional features such as DDoS protection and web application firewall.
+
+AWS CloudFront: Amazon Web Services (AWS) offers a CDN called CloudFront that can be integrated with other AWS services for a complete web hosting solution.
+
+Akamai: Akamai is a well-established CDN provider that offers a wide range of features and customization options.
+
+Google Cloud CDN: Google Cloud CDN is a service that utilizes Google's globally distributed edge points of presence to speed up the delivery of content.
+
+StackPath: StackPath is a CDN that offers advanced features such as edge computing and security services.
+
+Fastly: Fastly is a CDN that offers real-time analytics and the ability to customize content delivery at the edge.
+
+MaxCDN: MaxCDN is a CDN provider that focuses on ease of use and integration with other tools, such as WordPress, Magento, and Shopify.
+
+-
+
+These are just a few examples of the many CDN providers that are available, and the best one for you will depend on your specific needs and requirements. It's important to compare different CDN providers and evaluate their pricing, features, and support options before making a decision.
+
+es, there are a few Content Delivery Networks (CDNs) that offer a free tier or free plan:
+
+Cloudflare: Cloudflare has a free plan that includes basic features such as DDoS protection and web application firewall.
+
+AWS CloudFront: Amazon Web Services (AWS) offers a free tier for CloudFront that includes 50 GB data transfer out and 2,000,000 HTTP and HTTPS requests per month for one year.
+
+Azure CDN: Azure CDN by Microsoft offers a free trial for the first year, with no upfront costs and no termination fees.
+
+jsDelivr: jsDelivr is a free, open-source CDN that allows you to serve your own files or files from other popular open-source libraries.
+
+BunnyCDN: BunnyCDN has a pay-as-you-go pricing model, so it can be considered as "free" if you have low traffic website.
+
+It's important to note that while these CDNs offer a free tier or free plan, they may have limitations on the amount of data transfer or the number of requests that can be made, and additional fees may apply once you exceed these limits. Also, it's important to consider the features, support, and reliability of the CDN, and how it fits with your specific needs and requirements.
+
+-
+
+jsDelivr is a free, open-source Content Delivery Network (CDN) that allows you to serve your own files or files from other popular open-source libraries. It provides a fast and reliable way to serve static assets such as images, CSS, and JavaScript.
+
+Compared to other CDNs, jsDelivr has a few key differences:
+
+jsDelivr is focused on serving open-source libraries and has a large number of popular libraries pre-configured and ready to use.
+jsDelivr is free to use and has no limitations on the amount of data transfer or the number of requests.
+jsDelivr is built on top of multiple other CDNs, so it can automatically route users to the nearest and fastest server.
+jsDelivr provides a large number of plugins for different Content Management Systems (CMS) and build tools, making it easy to use with existing projects.
+However, jsDelivr has some limitations compared to other CDNs:
+
+jsDelivr doesn't provide additional features such as DDoS protection or web application firewall.
+jsDelivr doesn't provide a dashboard to see the analytics and usage data, it's only possible to see the number of downloads of a package.
+jsDelivr doesn't provide a free trial and paid plans.
+In summary, jsDelivr is a great option for serving open-source libraries and other static assets, but it may not be the best choice if you need additional features or analytics. If you have a low traffic website and you're looking for a free CDN service, jsDelivr can be a good choice. If you have a high traffic website or looking for more advanced features, you may need to consider a different paid CDN service.

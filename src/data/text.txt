@@ -1,0 +1,300 @@
+"data" folder: This folder would contain any data needed for the game, such as the correct answer for each photo and the options (a, b, c, d) for each photo.
+
+-
+
+In the "data" folder, you would likely include the following types of files:
+
+JSON, CSV or excel files: These would contain the data for the game, such as the correct answer for each photo and the options (a, b, c, d) for each photo.
+JavaScript files: These files would contain the data in a javascript object or array that can be imported and used by the game components.
+
+
+
+
+ <div>
+      <div className="flex  items-center justify-center">
+        <Photo />
+      </div>
+
+      <div className="flex items-center justify-center">
+        {/* First Column */}
+        <div className="grid grid-rows-1">
+          <div
+            id="option-a"
+            className="  m-4 h-12 w-48 overflow-hidden rounded-lg  text-center text-lg font-semibold  leading-none "
+          >
+            <Guess failedGuesses={failedGuesses} />{" "}
+            {/* Pass the failedGuesses state as a prop */}
+          </div>
+        </div>
+
+        {/* Second column  */}
+        <div className="grid grid-rows-1">
+          <div className=" m-4 h-12 w-48 overflow-hidden rounded-lg  text-center text-lg font-semibold  leading-none ">
+            <Score score={score} />
+          </div>
+        </div>
+      </div>
+
+      <Option options={currentOptions} checkAnswer={checkAnswer} />
+      <div className=" flex items-center justify-center">
+        <button
+          className="text-overflow-ellipsis m-4 h-12 w-48 overflow-hidden rounded-lg border-2 border-slate-800 bg-slate-300 text-center text-lg font-semibold  leading-none text-slate-800"
+          onClick={() => {
+            shuffleAnswers();
+            reset();
+          }}
+        >
+          New Game
+        </button>{" "}
+      </div>
+    </div>
+
+
+      <div className=" flex items-center justify-center">
+        <button
+          className="text-overflow-ellipsis m-4 h-12 w-48 overflow-hidden rounded-lg border-2 border-slate-800 bg-slate-300 text-center text-lg font-semibold  leading-none text-slate-800"
+          onClick={() => {
+            shuffleAnswers();
+            reset();
+          }}
+        >
+          New Game
+        </button>{" "}
+      </div>
+    </div>
+
+
+    import React, { useState, useEffect } from "react";
+import Photo from "./Photo";
+import Option from "./Option";
+import Score from "./Score";
+import Guess from "./Guess";
+import Index from "./Index";
+
+
+
+import { picData } from "../data/data";
+const Game = () => {
+  const [selectedObject, setSelectedObject] = useState(picData[0]);
+  const [selectedPicture, setSelectedPicture] = useState(0);
+
+  const [allOptions, setAllOptions] = useState([]);
+  const [currentOptions, setCurrentOptions] = useState([]);
+  const [failedGuesses, setFailedGuesses] = useState(0);
+  const [score, setScore] = useState(0);
+  const [correctOption, setCorrectOption] = useState("");
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    shuffleAnswers();
+  }, []);
+  const shuffleAnswers = () => {
+    // select a random object from the picData array
+    const randomObject = picData[Math.floor(Math.random() * picData.length)];
+    setSelectedPicture(randomObject);
+    setCorrectOption(randomObject.correctOption);
+    // concatenate the correct option and wrong options
+    const options = [randomObject.correctOption, ...randomObject.wrongOptions];
+    // shuffle the options
+    for (let i = options.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    setAllOptions(options);
+    setCurrentOptions(options);
+  };
+
+  const checkAnswer = (option) => {
+    if (option === correctOption) {
+      alert("Correct!");
+      setScore(score + 1);
+    } else {
+      alert("Wrong!");
+      setFailedGuesses(failedGuesses + 1);
+    }
+    setCounter(counter + 1);
+  };
+  const resetGame = () => {
+    shuffleAnswers();
+    setScore(0);
+    setFailedGuesses(0);
+  };
+
+  return (
+    <div>
+      <div className="flex  items-center justify-center">
+        <Photo selectedPicture={selectedPicture} />
+      </div>
+
+      <Option options={currentOptions} checkAnswer={checkAnswer} />
+
+      <div className="flex items-center justify-center">
+        {/* First Column */}
+        <div className="grid grid-rows-1">
+          <div
+            id="option-a"
+            className="  m-4 h-12 w-48 overflow-hidden rounded-lg  text-center text-lg font-semibold  leading-none "
+          >
+            <Guess failedGuesses={failedGuesses} />{" "}
+            {/* Pass the failedGuesses state as a prop */}
+            <Index />
+          </div>
+        </div>
+
+        {/* Second column  */}
+        <div className="grid grid-rows-1">
+          <div className=" m-4 h-12 w-48 overflow-hidden rounded-lg  text-center text-lg font-semibold  leading-none ">
+            <Score score={score} />
+          </div>
+        </div>
+      </div>
+      <div className=" flex items-center justify-center">
+        <button
+          className="text-overflow-ellipsis m-4 h-12 w-48 overflow-hidden rounded-lg border-2 border-slate-800 bg-slate-300 text-center text-lg font-semibold  leading-none text-slate-800"
+          onClick={() => {
+            shuffleAnswers();
+            resetGame();
+          }}
+        >
+          New Game
+        </button>{" "}
+      </div>
+    </div>
+  );
+};
+
+export default Game;
+
+// It looks like the problem is that you are using the allOptions state variable in the shuffleAnswers function without updating its value.
+// In javascript, arrays and objects are passed by reference, when you mutate an array or an object, the original state will be also mutated.
+// You can fix this by creating a copy of the allOptions state variable before mutating it in the shuffleAnswers function, you can use the spread operator to create a new array.
+
+
+import React, { useState, useEffect } from "react";
+import Photo from "./Photo";
+import Option from "./Option";
+import Score from "./Score";
+
+import { picData } from "../data/data";
+const Game = () => {
+  const [selectedPicture, setSelectedPicture] = useState(0);
+  const [total, setTotal] = useState(0);
+  const [allOptions, setAllOptions] = useState([]);
+  const [currentOptions, setCurrentOptions] = useState([]);
+  const [score, setScore] = useState(0);
+  const [correctOption, setCorrectOption] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [counter, setCounter] = useState(1);
+
+  useEffect(() => {
+    shuffleAnswers();
+  }, []);
+  const shuffleAnswers = () => {
+    // select the object at the current index from the picData array
+
+    const currentObject = picData[currentIndex];
+    setSelectedPicture(currentObject);
+    setCorrectOption(currentObject.correctOption);
+    // concatenate the correct option and wrong options
+    const options = [
+      currentObject.correctOption,
+      ...currentObject.wrongOptions,
+    ];
+    // shuffle the options
+    for (let i = options.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    setAllOptions(options);
+    setCurrentOptions(options);
+    // increment current index
+    setCurrentIndex(currentIndex + 1);
+    setTotal(picData.length);
+  };
+  const handleOptionClick = () => {
+    if (currentIndex === 0) {
+      setCounter(1);
+    } else {
+      setCounter(counter + 1);
+    }
+    console.log(currentIndex, currentIndex + 1, total);
+  };
+
+  const checkAnswer = (option) => {
+    if (option === correctOption) {
+      alert("Correct!");
+      setScore(score + 1);
+    } else {
+      alert("Wrong!");
+    }
+    setCurrentIndex(currentIndex + 1);
+
+    shuffleAnswers();
+
+    if (currentIndex + 1 === total) {
+      resetGame();
+      setCounter(1);
+    }
+  };
+
+  const resetGame = () => {
+    shuffleAnswers();
+    setCurrentIndex(0);
+    setScore(0);
+
+    console.log(currentIndex, currentIndex + 1);
+  };
+
+  return (
+    <div>
+      <div className="flex  items-center justify-center">
+        <Photo selectedPicture={selectedPicture} />
+      </div>
+
+      <Option
+        options={currentOptions}
+        handleOptionClick={handleOptionClick}
+        checkAnswer={checkAnswer}
+      />
+
+      <div className="flex items-center justify-center">
+        {/* First Column */}
+        <div className="grid grid-rows-1">
+          <div
+            id="option-a"
+            className="  m-4 h-12 w-48 overflow-hidden rounded-lg  text-center text-lg font-semibold  leading-none "
+          >
+            {/* Pass the failedGuesses state as a prop */}
+          </div>
+        </div>
+
+        {/* Second column  */}
+        <div className="grid grid-rows-1">
+          <div className=" m-4 h-12 w-48 overflow-hidden rounded-lg  text-center text-lg font-semibold  leading-none ">
+            <Score score={score} total={total} />
+          </div>
+        </div>
+      </div>
+      <div className=" flex items-center justify-center">
+        <button
+          className="text-overflow-ellipsis m-4 h-12 w-48 overflow-hidden rounded-lg border-2 border-slate-800 bg-slate-300 text-center text-lg font-semibold  leading-none text-slate-800"
+          onClick={() => {
+            resetGame();
+          }}
+        >
+          New Game
+        </button>
+      </div>
+
+      <div className=" flex items-center justify-center">
+        Index {counter} / {total}
+      </div>
+    </div>
+  );
+};
+
+export default Game;
+
+// It looks like the problem is that you are using the allOptions state variable in the shuffleAnswers function without updating its value.
+// In javascript, arrays and objects are passed by reference, when you mutate an array or an object, the original state will be also mutated.
+// You can fix this by creating a copy of the allOptions state variable before mutating it in the shuffleAnswers function, you can use the spread operator to create a new array.
