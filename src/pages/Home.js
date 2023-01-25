@@ -24,7 +24,9 @@ const Home = ({ setCatNb, setCategory, setCatName }) => {
       <div className="flex justify-center">
         <Categories setSelectedCategory={setSelectedCategory} />
       </div>
-
+      <div className="flex m-16 justify-center text-3xl">
+        Read all 3 steps to learn how to play.
+      </div>
       {/* How to play */}
       <div className="mt-8 lg:flex  lg:justify-evenly ">
         <div div className="StepOne mx-8 flex  justify-center lg:w-1/2">
@@ -45,7 +47,7 @@ const Home = ({ setCatNb, setCategory, setCatName }) => {
         </div>
       </div>
       <div className="mx-8 mt-8 lg:flex lg:justify-evenly">
-      <div className="StepTwo flex justify-center lg:w-1/2 ">
+        <div className="StepTwo flex justify-center lg:w-1/2 ">
           Step 2: In this step, you will be presented with a photo and four
           options. Your task is to guess what the photo represents by selecting
           one of the options. Once you have made your selection, the result will
@@ -61,7 +63,6 @@ const Home = ({ setCatNb, setCategory, setCatName }) => {
             className="h-[430px] w-[430px]"
           />
         </div>
-       
       </div>
       <div className="mx-8 mt-8 lg:flex lg:justify-evenly">
         <div className="StepThree my-8 flex justify-center lg:w-1/2">
